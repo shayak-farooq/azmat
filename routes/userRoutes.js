@@ -1,9 +1,7 @@
 const express = require('express');
 const router = express.Router()
-const {handleSignup} = require('../controllers/userController')
+const {handleSignup,verifySignupOtp} = require('../controllers/userController')
 
-router.get("/",( req , res ) => {
-    res.send("Hello world")
-})
-router.post('/',handleSignup)
+router.post('/signup',handleSignup)
+router.post('/verifysignupotp',verifySignupOtp)
 module.exports = router
