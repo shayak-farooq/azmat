@@ -21,6 +21,7 @@ function generateOTP() {
 async function handleSignup(req, res) {
     try {
         const { name, email, password } = req.body
+        console.log(req.body)
         const user = await User.find({ email })
         if (user.email) {
             return res.status(409).json({ err: "user already exists" })
@@ -85,6 +86,7 @@ async function verifySignupOtp(req, res) {
 async function handleLogin(req, res) {
     try {
         const { email, password } = req.body
+        console.log(email, password )
         const user = await User.findOne({ email })
         if (!user) {
             return res.json({ err: `invalid email` })
@@ -99,9 +101,10 @@ async function handleLogin(req, res) {
 }
 async function handleForgetPassword(req, res) {
     const { email } = req.body
+    console.log(email)
     const user = await User.findOne({ email })
     if (!user) {
-        return res.json({ err: "email not found" })
+        return res.status(404).json({ err: "email not found" })
     }
     let OTP = generateOTP()
     console.log(OTP)

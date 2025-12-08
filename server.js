@@ -3,7 +3,9 @@ const userRoutes = require('./routes/userRoutes')
 const productRoutes = require('./routes/ProductRoutes')
 const mongoose = require('mongoose');
 require('dotenv/config')
+const cors=require('cors')
 const app = express()
+
 //env 
 const PORT = process.env.PORT
 const MONGO_URI = process.env.MONGO_URI
@@ -19,6 +21,7 @@ mongoose.connect(MONGO_URI)
     process.exit(1)
 })
 //middlewares 
+app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 //Routes
